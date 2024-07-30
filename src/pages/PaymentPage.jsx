@@ -9,7 +9,7 @@ const PaymentPage = () => {
   const { state } = location;
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   if (!state) {
     return <Typography variant="h6">No payment details available</Typography>;
@@ -20,7 +20,7 @@ const PaymentPage = () => {
   const handlePayment = () => {
     if (paymentMethod === 'razorpay') {
       const options = {
-        key: 'rzp_test_h6OhXDTPYFvvVY', // Replace with your Razorpay key id
+        key: import.meta.env.VITE_RAZORPAY_API_KEY, // Replace with your Razorpay key id
         amount: totalPayment * 100, // Amount in paise
         currency: 'INR',
         name: 'Car Rental Service',
