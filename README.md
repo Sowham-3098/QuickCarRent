@@ -1,4 +1,6 @@
-# Quick Car Rental
+# Quick Car Rent - Car Rental Wensite
+
+
 
 ## Description
 
@@ -58,3 +60,6 @@ Quick Car Rental is a car rental application that allows users to book cars onli
    npm start
    # or
    yarn start
+
+
+![New Website Blue Mockup Instagram - Laptop (1)](https://github.com/user-attachments/assets/93431840-9ff6-4884-8f70-599950e0976e)
