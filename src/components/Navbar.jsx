@@ -128,12 +128,12 @@ const Navbar = () => {
             Quick Car Rent 
           </AppBarLogo>
 
-          <Link to={`/cart`} aria-label="Go to my Cart">
-            <Button sx={{ color: Colors.primary }}>
-              <ShoppingCart />
-              <Typography sx={{ marginTop: "-1rem" }}>{`(${cartState.length})`}</Typography>
-            </Button>
-          </Link>
+          <Link to={`/booking-history`} aria-label="Booking History">
+              <Button sx={{ color: Colors.primary }}>
+                <CarRental />
+                
+              </Button>
+            </Link>
         </AppBarContainer>
       ) : (
         <AppBarContainer>
