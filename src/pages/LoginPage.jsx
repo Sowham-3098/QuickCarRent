@@ -10,7 +10,7 @@ const LoginPage = () => {
     <PageContainer>
       <Paper
         elevation={3}
-        sx={{ width: "20rem", margin: "0 auto", padding: "1.5rem 1rem", marginTop: "3rem" }}
+        sx={{ width: "20rem", margin: "0 auto", padding: "2.5rem 2rem", marginTop: "5rem" ,background: "linear-gradient(to bottom,  #fb923c, #fdba74, #fed7aa)" }}
       >
         <Typography variant="h4" mb="1rem">
           Login
@@ -19,7 +19,7 @@ const LoginPage = () => {
         <Divider textAlign="center" />
         <Typography variant="subtitle1" mt="2rem">
           Don't have an account?{" "}
-          <Link to="/register" sx={{ color: Colors.secondary }}>
+          <Link to="/register" sx={{ color: Colors.black }}>
             Sign up
           </Link>
         </Typography>

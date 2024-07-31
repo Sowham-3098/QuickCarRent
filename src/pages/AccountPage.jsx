@@ -26,9 +26,9 @@ const AccountPage = () => {
           padding: "2rem",
           borderRadius: "12px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          backgroundColor: Colors.background,
+          background: "linear-gradient(to bottom,  #fb923c, #fdba74, #fed7aa)",
           textAlign: "center",
-          maxWidth: "600px",
+          maxWidth: "500px",
           margin: "auto",
           marginTop: "5rem", // Added margin top
         }}

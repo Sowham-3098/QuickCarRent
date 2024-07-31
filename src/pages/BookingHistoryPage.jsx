@@ -70,7 +70,7 @@ const BookingHistoryPage = () => {
       <Grid container spacing={3}>
         {bookings.map((booking, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Paper sx={{ padding: '1.5rem', mb: '1rem', backgroundColor: Colors.paper }}>
+            <Paper sx={{ padding: '1.5rem', mb: '1rem', background: "linear-gradient(to bottom, #3f3f46, #52525b, #71717a)" }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold', mb: '0.5rem', color: Colors.primary }}>
                 Car Model: {booking.car.name}
               </Typography>

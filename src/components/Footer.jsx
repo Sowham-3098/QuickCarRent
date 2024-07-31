@@ -13,9 +13,9 @@ const Footer = () => {
         background: "linear-gradient(to bottom, #a1a1aa,#a1a1aa )",
         color: "white",
         width: "100vw",
-        padding: "0.5rem",
+        padding: "0.3rem",
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >
