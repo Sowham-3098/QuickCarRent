@@ -16,6 +16,7 @@ const CheckoutPage = () => {
   const [locationDetails, setLocationDetails] = useState('');
   const [pickupDate, setPickupDate] = useState('');
   const [paymentMethod] = useState('razorpay'); // Only Razorpay as the payment method
+  const [errors, setErrors] = useState({});
 
   if (!state || !state.car) {
     return <Typography variant="h6">No booking details available</Typography>;
@@ -34,19 +35,32 @@ const CheckoutPage = () => {
     }
   };
 
+  const validate = () => {
+    const newErrors = {};
+    if (!userDetails.name) newErrors.name = "Name is required";
+    if (!userDetails.email) newErrors.email = "Email is required";
+    if (!userDetails.phone) newErrors.phone = "Phone is required";
+    if (!locationDetails) newErrors.location = "Location is required";
+    if (!pickupDate) newErrors.pickupDate = "Pickup date is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/payment', {
-      state: {
-        car,
-        days,
-        totalPayment,
-        userDetails,
-        locationDetails,
-        pickupDate,
-        paymentMethod,
-      },
-    });
+    if (validate()) {
+      navigate('/payment', {
+        state: {
+          car,
+          days,
+          totalPayment,
+          userDetails,
+          locationDetails,
+          pickupDate,
+          paymentMethod,
+        },
+      });
+    }
   };
 
   return (
@@ -74,41 +88,54 @@ const CheckoutPage = () => {
               <Typography variant="h6" sx={{ mb: "1rem" }}>User Details</Typography>
               <TextField
                 fullWidth
+                required
                 label="Name"
                 name="name"
                 value={userDetails.name}
                 onChange={handleChange}
                 sx={{ mb: "1rem" }}
+                error={!!errors.name}
+                helperText={errors.name}
               />
               <TextField
                 fullWidth
+                required
                 label="Email"
                 name="email"
                 type="email"
                 value={userDetails.email}
                 onChange={handleChange}
                 sx={{ mb: "1rem" }}
+                error={!!errors.email}
+                helperText={errors.email}
               />
               <TextField
                 fullWidth
+                required
                 label="Phone"
                 name="phone"
                 type="tel"
                 value={userDetails.phone}
                 onChange={handleChange}
                 sx={{ mb: "1rem" }}
+                error={!!errors.phone}
+                helperText={errors.phone}
               />
               <Typography variant="h6" sx={{ mb: "1rem" }}>Location and Pickup Date</Typography>
               <TextField
                 fullWidth
+                required
                 label="Location"
                 name="location"
                 value={locationDetails}
                 onChange={handleChange}
                 sx={{ mb: "1rem" }}
+                error={!!errors.location}
+                helperText={errors.location}
               />
               <TextField
                 fullWidth
+                required
                 label="Pickup Date"
                 name="pickupDate"
                 type="date"
@@ -116,6 +143,8 @@ const CheckoutPage = () => {
                 value={pickupDate}
                 onChange={handleChange}
                 sx={{ mb: "1rem" }}
+                error={!!errors.pickupDate}
+                helperText={errors.pickupDate}
               />
               <Typography variant="h6" sx={{ mb: "1rem" }}>Payment Method</Typography>
               <Typography variant="body1" sx={{ mb: "1rem" }}>
