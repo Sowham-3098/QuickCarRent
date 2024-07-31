@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
@@ -119,6 +122,7 @@ const HomePage = () => {
     },
   ];
 
+
   const handleBookNowClick = () => {
     if (bookingRef.current) {
       bookingRef.current.scrollIntoView({ behavior: "smooth" });
@@ -146,9 +150,13 @@ const HomePage = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(to bottom,  #e2e8f0, #f1f5f9, #f8fafc)",
+        background: "linear-gradient(to bottom, #e2e8f0, #f1f5f9, #f8fafc)",
         padding: "2rem",
         marginBottom: "3rem",
+        [theme.breakpoints.down("sm")]: {
+          padding: "1rem",
+          marginTop: "6rem"
+        },
       }}
     >
       {/* Hero Section */}
@@ -157,7 +165,14 @@ const HomePage = () => {
           item
           xs={12}
           md={6}
-          sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            [theme.breakpoints.down("sm")]: {
+              textAlign: "center",
+            },
+          }}
         >
           <Box
             sx={{
@@ -166,36 +181,59 @@ const HomePage = () => {
               color: Colors.black,
               boxShadow: `0px 4px 10px ${Colors.shadow}`,
               maxWidth: "500px",
+              [theme.breakpoints.down("sm")]: {
+                maxWidth: "100%",
+                padding: "1rem",
+              },
             }}
           >
             <Typography
               variant="h2"
-              sx={{ fontWeight: "bold", mb: "1rem", fontFamily: "'Roboto', sans-serif" }}
+              sx={{
+                fontWeight: "bold",
+                mb: "1rem",
+                fontFamily: "'Roboto', sans-serif",
+                fontSize: matches ? "1.5rem" : "2.5rem",
+              }}
             >
               Welcome to Quick Car Rent
             </Typography>
             <Typography
               variant="h5"
-              sx={{ mb: "2rem",  fontFamily: "'Open Sans', sans-serif" }}
+              sx={{
+                mb: "2rem",
+                fontFamily: "'Open Sans', sans-serif",
+                fontSize: matches ? "1rem" : "1.5rem",
+              }}
             >
               Rent Your Dream Car with Us!
             </Typography>
             <Typography
               variant="h6"
-              sx={{ mb: "2rem", fontFamily: "'Open Sans', sans-serif" }}
+              sx={{
+                mb: "2rem",
+                fontFamily: "'Open Sans', sans-serif",
+                fontSize: matches ? "0.875rem" : "1.125rem",
+              }}
             >
               Choose from our wide range of vehicles and enjoy a smooth ride!
             </Typography>
-            <div sx={{ display: "flex-row", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: matches ? "column" : "row",
+                alignItems: "center",
+                gap: "1rem",
+              }}
+            >
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
                 sx={{
                   backgroundColor: Colors.primary,
-                  marginRight: "2rem",
                   "&:hover": { backgroundColor: Colors.secondaryLight },
                 }}
-                onClick={handleVehicleClick} 
+                onClick={handleVehicleClick}
               >
                 Vehicle Models
               </Button>
@@ -206,27 +244,34 @@ const HomePage = () => {
                   backgroundColor: Colors.primary,
                   "&:hover": { backgroundColor: Colors.secondaryLight },
                 }}
-                onClick={handleBookNowClick} // Scroll to booking section
+                onClick={handleBookNowClick}
               >
                 Book Now
               </Button>
-            </div>
+            </Box>
           </Box>
         </Grid>
         <Grid
           item
           xs={12}
           md={6}
-          sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <Box
             component="img"
             sx={{
               borderRadius: "15px",
               boxShadow: `0px 4px 10px ${Colors.shadow}`,
-              width: "120%",
+              width: "100%",
               maxWidth: "700px",
               height: "auto",
+              [theme.breakpoints.down("sm")]: {
+                width: "90%",
+              },
             }}
             src={bannerImage}
             alt="Car Rental Banner"
@@ -237,7 +282,7 @@ const HomePage = () => {
 
       {/* Car Models Section */}
       <Typography
-        ref={vehicleModelsRef} // Attach the ref here
+        ref={vehicleModelsRef}
         variant="h4"
         sx={{
           textAlign: "center",
@@ -245,6 +290,7 @@ const HomePage = () => {
           mb: "2rem",
           fontWeight: "bold",
           fontFamily: "'Roboto', sans-serif",
+          fontSize: matches ? "1.5rem" : "2rem",
         }}
       >
         Our Car Models
@@ -276,21 +322,31 @@ const HomePage = () => {
                 <Typography
                   variant="h6"
                   component="div"
-                  sx={{ fontWeight: "bold", mb: "0.5rem", fontFamily: "'Roboto', sans-serif" }}
+                  sx={{
+                    fontWeight: "bold",
+                    mb: "0.5rem",
+                    fontFamily: "'Roboto', sans-serif",
+                    fontSize: matches ? "1rem" : "1.25rem",
+                  }}
                 >
                   {model.name}
                 </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ fontFamily: "'Open Sans', sans-serif" }}
+                  sx={{ fontFamily: "'Open Sans', sans-serif", fontSize: matches ? "0.875rem" : "1rem" }}
                 >
                   {model.description}
                 </Typography>
                 <Typography
                   variant="h6"
                   color="text.primary"
-                  sx={{ mt: "0.5rem", fontWeight: "bold", fontFamily: "'Roboto', sans-serif" }}
+                  sx={{
+                    mt: "0.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "'Roboto', sans-serif",
+                    fontSize: matches ? "1rem" : "1.25rem",
+                  }}
                 >
                   Rent Per Day: {model.rentPerDay}
                 </Typography>
@@ -319,7 +375,7 @@ const HomePage = () => {
 
       {/* Booking Section */}
       <Typography
-        ref={bookingRef} // Attach the ref here
+        ref={bookingRef}
         variant="h4"
         sx={{
           textAlign: "center",
@@ -328,6 +384,7 @@ const HomePage = () => {
           mb: "2rem",
           fontWeight: "bold",
           fontFamily: "'Roboto', sans-serif",
+          fontSize: matches ? "1.5rem" : "2rem",
         }}
       >
         Book Your Car
@@ -341,36 +398,36 @@ const HomePage = () => {
           boxShadow: `0px 4px 10px ${Colors.shadow}`,
           background: "linear-gradient(to bottom,  #fb923c, #fdba74, #fed7aa)",
           borderRadius: "15px",
+          maxWidth: "600px",
+          margin: "0 auto",
         }}
       >
         <TextField
           select
-          SelectProps={{ native: true }}
+          label="Select Car"
+          fullWidth
           value={selectedCar}
           onChange={(e) => setSelectedCar(e.target.value)}
-          label="Select Car Model"
-          sx={{ mb: "1rem", width: "300px" }}
+          sx={{ mb: "1rem" }}
+          SelectProps={{ native: true }}
         >
-          <option value="" disabled>
-            
-          </option>
-          {carModels.map((model, index) => (
-            <option key={index} value={model.name}>
+          <option value=""></option>
+          {carModels.map((model) => (
+            <option key={model.name} value={model.name}>
               {model.name}
             </option>
           ))}
         </TextField>
         <TextField
           type="number"
-          value={rentalDays}
-          onChange={(e) => setRentalDays(Number(e.target.value))}
           label="Number of Days"
-          sx={{ mb: "1rem", width: "300px" }}
-          inputProps={{ min: 1 }}
+          value={rentalDays}
+          onChange={(e) => setRentalDays(e.target.value)}
+          fullWidth
+          sx={{ mb: "1rem" }}
         />
         <Button
           variant="contained"
-          endIcon={<ArrowForwardIcon />}
           sx={{
             backgroundColor: Colors.primary,
             "&:hover": { backgroundColor: Colors.secondaryLight },

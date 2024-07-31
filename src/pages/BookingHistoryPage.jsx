@@ -47,7 +47,7 @@ const BookingHistoryPage = () => {
 
   if (bookings.length === 0) {
     return (
-      <Typography variant="h6" sx={{ textAlign: 'center', mt: '3rem' }}>
+      <Typography variant="h6" sx={{ textAlign: 'center', mt: '4rem' }}>
         No booking history available.
       </Typography>
     );
@@ -58,7 +58,7 @@ const BookingHistoryPage = () => {
       sx={{
         padding: '2rem',
         backgroundColor: Colors.background,
-        mt: '3rem',
+        mt: '4rem',
         marginBottom: '4rem',
         height: 'calc(100vh - 6rem)',
         overflowY: 'auto',

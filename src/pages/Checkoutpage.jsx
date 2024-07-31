@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box, Typography, TextField, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import { Box, Typography, TextField, Button, Grid, Card, CardContent, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { Colors } from '../styles/theme/theme';
 
 const CheckoutPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = location;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Check for mobile devices
 
   const [userDetails, setUserDetails] = useState({
     name: '',
@@ -18,11 +19,11 @@ const CheckoutPage = () => {
   const [paymentMethod] = useState('razorpay'); // Only Razorpay as the payment method
   const [errors, setErrors] = useState({});
 
-  if (!state || !state.car) {
+  if (!location.state || !location.state.car) {
     return <Typography variant="h6">No booking details available</Typography>;
   }
 
-  const { car, days, totalPayment } = state;
+  const { car, days, totalPayment } = location.state;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,18 +67,18 @@ const CheckoutPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: isMobile ? '1rem' : '2rem',
         backgroundColor: Colors.background,
-        marginTop: "3rem",
-        marginBottom: "3rem",
+        marginTop: isMobile ? '5rem' : '3rem',
+        marginBottom: '3rem',
       }}
     >
       <Typography variant="h4" sx={{ textAlign: "center", mb: "2rem", fontWeight: "bold" }}>
         Enter Details
       </Typography>
-      <Grid container spacing={4}>
+      <Grid container spacing={isMobile ? 2 : 4}>
         <Grid item xs={12} md={6}>
-          <Card sx={{ maxWidth: "100%", borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}`, p: "2rem" ,background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)"}}>
+          <Card sx={{ borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}`, p: isMobile ? "1rem" : "2rem", background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)" }}>
             <CardContent>
               <Typography variant="h5" sx={{ mb: "1rem" }}>
                 Car: {car.name}
@@ -163,17 +164,15 @@ const CheckoutPage = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}` ,background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)"}}>
+          <Card sx={{ borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}`, background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)" }}>
             <CardMedia
               component="img"
-              height="400"
-              image={car.image} // Display the car image
+              height={isMobile ? '250' : '400'}
+              image={car.image}
               alt={car.name}
               sx={{ objectFit: 'cover', borderRadius: "15px 15px 0 0" }}
             />
-            <CardContent
-              sx={{ backgroundColor: Colors.primaryLight, borderRadius: "0 0 15px 15px", padding: "1rem" }}
-            >
+            <CardContent sx={{ backgroundColor: Colors.primaryLight, borderRadius: "0 0 15px 15px", padding: isMobile ? "0.5rem" : "1rem" }}>
               <Typography variant="h6" sx={{ mb: "1rem", textAlign: "center", fontWeight: "bold" }}>
                 Booking Summary
               </Typography>
