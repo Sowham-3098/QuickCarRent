@@ -54,7 +54,16 @@ const BookingHistoryPage = () => {
   }
 
   return (
-    <Box sx={{ padding: '2rem', backgroundColor: Colors.background, minHeight: '100vh', mt: '3rem' }}>
+    <Box
+      sx={{
+        padding: '2rem',
+        backgroundColor: Colors.background,
+        mt: '3rem',
+        marginBottom: '4rem',
+        height: 'calc(100vh - 6rem)',
+        overflowY: 'auto',
+      }}
+    >
       <Typography variant="h4" sx={{ textAlign: 'center', mb: '2rem', fontWeight: 'bold', color: Colors.primary }}>
         Booking History
       </Typography>
@@ -62,7 +71,7 @@ const BookingHistoryPage = () => {
         {bookings.map((booking, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Paper sx={{ padding: '1.5rem', mb: '1rem', backgroundColor: Colors.paper }}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: '0.5rem', color: Colors.secondary }}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: '0.5rem', color: Colors.primary }}>
                 Car Model: {booking.car.name}
               </Typography>
               <Typography variant="body1" sx={{ mb: '0.5rem' }}>

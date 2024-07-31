@@ -19,7 +19,7 @@ code {
   background-color: #e0f7fa;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  color: #01579b;
+  color: #dd640d;
 }
 
 :focus {
@@ -33,7 +33,7 @@ a:hover {
 
 a:any-link {
   text-decoration: none;
-  color: #0288d1;
+  color: #cd6b02;
 }
 
 @media screen and (max-width: 600px) {

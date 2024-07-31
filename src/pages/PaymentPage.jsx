@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Colors } from '../styles/theme/theme';
 
@@ -43,10 +43,10 @@ const PaymentPage = () => {
           const allBookings = JSON.parse(localStorage.getItem('bookings')) || [];
           localStorage.setItem('bookings', JSON.stringify([...allBookings, bookingDetails]));
 
-     
-         
+          setPaymentSuccess(true);
+          setTimeout(() => {
             navigate('/booking-history');
-         
+          }, 2000);
         },
         prefill: {
           name: userDetails.name,
@@ -80,80 +80,81 @@ const PaymentPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: '2rem',
         backgroundColor: Colors.background,
-        marginTop: "3rem",
+        marginTop: '3rem',
+        borderRadius: '10px',
+        boxShadow: `0px 4px 20px ${Colors.shadow}`,
+        maxWidth: '600px',
+        margin: '3rem auto',
       }}
     >
-      <Typography variant="h4" sx={{ textAlign: "center", mb: "2rem", fontWeight: "bold" }}>
+      <Typography variant="h4" sx={{ textAlign: 'center', mb: '2rem', fontWeight: 'bold', color: Colors.primary }}>
         Payment
       </Typography>
 
-      <Typography variant="h6" sx={{ mb: "1rem" }}>
-        Car Model: {car.name}
-      </Typography>
-      <Typography variant="body1" sx={{ mb: "1rem" }}>
-        Total Payment: ${totalPayment}
-      </Typography>
-      <Typography variant="body1" sx={{ mb: "1rem" }}>
-        Rental Duration: {days} day(s)
-      </Typography>
-      <Typography variant="body1" sx={{ mb: "1rem" }}>
-        Pickup Date: {pickupDate}
-      </Typography>
-      <Typography variant="body1" sx={{ mb: "1rem" }}>
-        Location: {locationDetails}
-      </Typography>
-      <Typography variant="body1" sx={{ mb: "1rem" }}>
-        User: {userDetails.name}
-      </Typography>
-
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{ display: "block", margin: "auto", mt: "2rem", borderRadius: "20px" }}
-        onClick={handlePopupOpen}
+      <Box
+        sx={{
+          background: "linear-gradient(to bottom, #fb923c, #fdba74, #fed7aa)",
+          padding: '2rem',
+          borderRadius: '10px',
+          boxShadow: `0px 4px 10px ${Colors.shadow}`,
+        }}
       >
-        Pay Now
-      </Button>
+        <Typography variant="h6" sx={{ mb: '1rem' }}>
+          Car Model: {car.name}
+        </Typography>
+        <Typography variant="body1" sx={{ mb: '1rem' }}>
+          Total Payment: ${totalPayment}
+        </Typography>
+        <Typography variant="body1" sx={{ mb: '1rem' }}>
+          Rental Duration: {days} day(s)
+        </Typography>
+        <Typography variant="body1" sx={{ mb: '1rem' }}>
+          Pickup Date: {pickupDate}
+        </Typography>
+        <Typography variant="body1" sx={{ mb: '1rem' }}>
+          Location: {locationDetails}
+        </Typography>
+        <Typography variant="body1" sx={{ mb: '1rem' }}>
+          User: {userDetails.name}
+        </Typography>
+
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{
+            display: 'block',
+            margin: 'auto',
+            mt: '2rem',
+            borderRadius: '20px',
+            padding: '0.5rem 2rem',
+            backgroundColor: Colors.primary,
+            '&:hover': { backgroundColor: Colors.secondaryLight },
+          }}
+          onClick={handlePopupOpen}
+        >
+          Pay Now
+        </Button>
+      </Box>
 
       {/* Confirmation Popup */}
-      {isPopupOpen && (
-        <Box
-          sx={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: Colors.background,
-            padding: '2rem',
-            borderRadius: '10px',
-            boxShadow: `0px 4px 10px ${Colors.shadow}`,
-          }}
-        >
-          <Typography variant="h6" sx={{ mb: "1rem" }}>
-            Confirm Payment
-          </Typography>
-          <Typography variant="body1" sx={{ mb: "1rem" }}>
+      <Dialog open={isPopupOpen} onClose={() => handlePopupClose(false)}>
+        <DialogTitle>Confirm Payment</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
             Are you sure you want to proceed with the payment?
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handlePopupClose(true)}
-            sx={{ mr: "1rem" }}
-          >
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handlePopupClose(true)} color="primary">
             Confirm
           </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => handlePopupClose(false)}
-          >
+          <Button onClick={() => handlePopupClose(false)} color="secondary">
             Cancel
           </Button>
-        </Box>
-      )}
+        </DialogActions>
+      </Dialog>
 
       {/* Payment Success Popup */}
       {paymentSuccess && (
@@ -168,9 +169,10 @@ const PaymentPage = () => {
             padding: '2rem',
             borderRadius: '10px',
             boxShadow: `0px 4px 10px ${Colors.shadow}`,
+            textAlign: 'center',
           }}
         >
-          <Typography variant="h6" sx={{ mb: "1rem" }}>
+          <Typography variant="h6" sx={{ mb: '1rem' }}>
             Payment Successful!
           </Typography>
           <Typography variant="body1">

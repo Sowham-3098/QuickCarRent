@@ -22,7 +22,7 @@ const BookingPage = () => {
       sx={{
         padding: "2rem",
         backgroundColor: Colors.background,
-        marginTop: "3rem",
+        marginTop: "4rem",
         marginBottom: "3rem", // Added margin on top
       }}
     >
@@ -31,7 +31,7 @@ const BookingPage = () => {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <Card sx={{ maxWidth: "100%" }}>
+          <Card sx={{ maxWidth: "100%",borderStyle: "ridge" , borderColor: "#fdba74",borderWidth: "4px"}}>
             <CardMedia
               component="img"
               height="400"
@@ -42,7 +42,7 @@ const BookingPage = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%',  background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74, #fed7aa)", padding:"2rem" }}>
             <CardContent>
               <Typography variant="h5" sx={{ fontWeight: 'bold', mb: '1rem' }}>
                 {name}

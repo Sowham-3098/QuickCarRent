@@ -63,7 +63,7 @@ const CheckoutPage = () => {
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Card sx={{ maxWidth: "100%", borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}`, p: "2rem" }}>
+          <Card sx={{ maxWidth: "100%", borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}`, p: "2rem" ,background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)"}}>
             <CardContent>
               <Typography variant="h5" sx={{ mb: "1rem" }}>
                 Car: {car.name}
@@ -134,7 +134,7 @@ const CheckoutPage = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}` }}>
+          <Card sx={{ borderRadius: "15px", boxShadow: `0px 4px 10px ${Colors.shadow}` ,background: "linear-gradient(to bottom, #f97316, #fb923c, #fdba74)"}}>
             <CardMedia
               component="img"
               height="400"

@@ -10,7 +10,7 @@ const Footer = () => {
       sx={{
         position: "fixed",
         bottom: 0,
-        backgroundColor: Colors.primary,
+        background: "linear-gradient(to bottom, #a1a1aa,#a1a1aa )",
         color: "white",
         width: "100vw",
         padding: "0.5rem",
@@ -19,7 +19,8 @@ const Footer = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="body2">
+      <Typography variant="body2"
+      sx={{color: "#000000" , marginLeft: "4px"}}>
         © 2024 Sowham Bhuin All Rights Reserved
       </Typography>
       <Box>

@@ -1,7 +1,9 @@
 import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Container } from "@mui/system";
-import { Colors } from "../theme/theme";
+import { Colors } from "../theme/theme"; // Assuming Colors is defined in the theme
+
+const orangeColor = "#ffa500"; // Define a constant for the orange color
 
 export const AppBarContainer = styled(Container)(() => ({
   display: "flex",
@@ -16,7 +18,7 @@ export const AppBarLogo = styled(Typography)(() => ({
   fontFamily: "monospace",
   fontWeight: 700,
   letterSpacing: ".3rem",
-  color: "#ffa500",
+  color: orangeColor,
   fontSize: "1.3rem",
   fontStyle: "italic",
   alignItems: "center",
