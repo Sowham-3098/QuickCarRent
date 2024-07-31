@@ -1,13 +1,10 @@
+import React from "react";
 import Form from "./Form";
 import { useDispatch } from "react-redux";
-import { setUser } from "../features/user/UserSlice";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../features/user/UserSlice";
+import { setBookings } from "../features/bookings/BookingSlice";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider } from "../firebase";
 import { Button, Typography, Box } from "@mui/material";
 import { Google } from "@mui/icons-material";
@@ -24,10 +21,14 @@ const Login = () => {
         dispatch(
           setUser({
             email: user.email,
-            id: user.id,
+            id: user.uid, // corrected to use uid instead of id
             token: user.accessToken,
           })
         );
+
+        const userBookings = JSON.parse(localStorage.getItem(`bookings_${user.uid}`)) || [];
+        dispatch(setBookings(userBookings));
+        
         navigate("/");
       })
       .catch((error) => {
@@ -47,22 +48,24 @@ const Login = () => {
         dispatch(
           setUser({
             email: user.email,
-            id: user.id,
+            id: user.uid, // corrected to use uid instead of id
             token: user.accessToken,
           })
         );
+
+        const userBookings = JSON.parse(localStorage.getItem(`bookings_${user.uid}`)) || [];
+        dispatch(setBookings(userBookings));
+
         navigate("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
       });
   };
+
   return (
     <Box>
-      <Form title="LOGIN" handleClick={handleLogin} />
+      <Form title="SIGN IN" handleClick={handleLogin} />
       
     </Box>
   );
