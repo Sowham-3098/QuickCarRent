@@ -19,6 +19,11 @@ const AccountPage = () => {
     navigate('/booking-history'); // Redirect to Booking History page
   };
 
+  const handleLogout = () => {
+    dispatch(removeUser()); // Dispatch removeUser action to clear Redux state and local storage
+    navigate('/login'); // Redirect to login page after logout
+  };
+
   return isAuth ? (
     <PageContainer>
       <Paper
@@ -30,7 +35,7 @@ const AccountPage = () => {
           textAlign: "center",
           maxWidth: "500px",
           margin: "auto",
-          marginTop: "5rem", // Added margin top
+          marginTop: "5rem",
         }}
       >
         <Typography
@@ -71,7 +76,7 @@ const AccountPage = () => {
         <Box mt="2rem">
           <MyButton
             variant="contained"
-            onClick={() => dispatch(removeUser())}
+            onClick={handleLogout} // Updated to call handleLogout
             endIcon={<Logout />}
             aria-label="Sign out"
             sx={{
